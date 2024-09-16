@@ -1,0 +1,47 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+
+ //超出記憶體限制，nums=[500000000,2,4,500000000]
+#include <stdio.h>
+#include <stdlib.h>
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    //find max & min
+    int max=nums[0];
+    int min=nums[0];
+    for(int i=1;i<numsSize;i++){
+        max=max>nums[i]? max:nums[i];
+        min=min<nums[i]? min:nums[i];
+    }
+    //build map[], returnarr[]，分別用來存hash轉換後的索引、回傳結果
+    int mapsize=max-min+1;
+    int* map=(int*) malloc (mapsize*sizeof(int));//存hash轉換後的索引
+    int* returnarr=(int*) malloc (2*sizeof(int));
+    //map[i]=-1, threr is no value in nums[]
+    for(int i=0;i< mapsize;i++){
+        map[i]=-1;
+    }
+    //find comp 
+    for(int i=0;i<numsSize;i++){
+        //確認map[]中有無對應的值，使相加等於目標
+        int comp=target-nums[i];
+        if(comp>max || comp<min) continue; //make sure comp may appear in nums[]
+        //find whether comp in the map[]
+        else if(map[comp-min]!=-1){
+            //表示有值
+            returnarr[0]=map[comp-min];
+            returnarr[1]=i;
+            *returnSize = 2;
+            free(map);
+            return returnarr;
+        }
+        else{
+            //store in map
+            map[nums[i]-min]=i;
+        }
+    }
+    //error
+    *returnSize = 0;
+    free(map);
+    return returnarr;
+}
