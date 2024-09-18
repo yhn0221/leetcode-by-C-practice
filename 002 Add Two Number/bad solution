@@ -1,3 +1,5 @@
+//直接拿指標進行操作，資料完整性、資料不可預測性錯、破換原始資料
+
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
     struct ListNode* t3=NULL;
     struct ListNode* head=NULL;
