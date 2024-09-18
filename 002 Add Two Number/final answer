@@ -15,7 +15,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
         }
         struct ListNode* new=malloc(sizeof(struct ListNode));
         new->val=sum%10;
-        sum=sum/10;
+        sum=sum/10;//留下進位，留在下一次while的時侯再加
         if(head!= NULL){
             //第二次後
             t3->next=new;//改成現在這樣，下一個所指的放上new，再往前移動
