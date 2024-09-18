@@ -1,0 +1,35 @@
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
+    struct ListNode* t1=l1;
+    struct ListNode* t2=l2;
+    struct ListNode* t3=NULL;
+    struct ListNode* head=NULL;
+    int sum=0;
+    while(sum||t1||t2){
+        if(t1){
+            sum=sum+t1->val;
+            t1=t1->next;
+        }
+        if(t2){
+            sum=sum+t2->val;
+            t2=t2->next;
+        }
+        struct ListNode* new=malloc(sizeof(struct ListNode));
+        new->val=sum%10;
+        sum=sum/10;
+        if(head!= NULL){
+            //第二次後
+            t3->next=new;//改成現在這樣，下一個所指的放上new，再往前移動
+            t3=new;
+            //free(new);//有錯，會因為這樣也把現在的node一起刪掉，因為t3和new指向相同位置
+        }
+        else{
+            //第一次，要head 、t3放到對的位置
+            t3=new;
+            head=t3;
+            //t3=t3->next;//有錯，不能先移到下一個位置，因為這樣會指到沒有定義的位置，不該讓他只向NULL
+            //free(new);//有錯，會因為這樣也把現在的node一起刪掉，因為t3和new指向相同位置
+        }
+    } 
+    t3->next=NULL;
+    return head;
+}
