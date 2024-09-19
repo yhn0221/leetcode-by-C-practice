@@ -7,11 +7,11 @@ int majorityElement(int* nums, int numsSize) {
 
     int a[numsSize][2];
 
-    //init a[][]
+    //建立 a[][]，並且將內容記錄0
     for(int i = 0; i < numsSize; i++)
         for(int j = 0; j < 2; j++)
             a[i][j] = 0;
-
+    //開始此數字出現幾次
     for(int i = 0; i < numsSize; i++){
         int number = nums[i];
 
@@ -20,13 +20,14 @@ int majorityElement(int* nums, int numsSize) {
                 a[j][1]++;
                 break;
             }else if(a[j][0] == 0){
+                //表示該數第一次遇到，因此記錄此數字並且將該數字次數+1
                 a[j][0] = number;
                 a[j][1]++;
                 break;
             }
         }
     }
-
+    //找出現過數字的最大值
     int max_index = 0, max_value = 0;
 
     for(int i = 0; i < numsSize; i++){
