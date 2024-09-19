@@ -1,3 +1,5 @@
+//time complexity=O(n^2)，不好的方法
+
 int majorityElement(int* nums, int numsSize) {
 
     if(numsSize <= 1)
