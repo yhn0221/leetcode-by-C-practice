@@ -1,4 +1,4 @@
-//boyer moore演算法，用投票、候選人的概念，專門處理「找數量超過半數的數字」
+//boyer moore演算法Boyer-Moore Voting Algorithm，用投票、候選人的概念，專門處理「找數量超過半數的數字」
 
 
 int majorityElement(int* nums, int numsSize) {
