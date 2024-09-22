@@ -1,0 +1,26 @@
+int numMatchingSubseq(char* s, char** words, int wordsSize) {
+    int count=0;
+    for(int i=0;i<wordsSize;i++){
+        int len=strlen(words[i]);
+        char* str=s;//point to s
+        bool check=true;//boolin type, check=true or false
+        for(int j=0;j<len;j++){
+            //check first
+            str=strchr(str,words[i][j]);// Find the first character(words[i][j]) in the string start at str
+                                        //if find it success return the char position,or return NULL
+            if(str!=NULL){
+                //success
+                str++;//Move the pointer forward by one position
+            }
+            else{
+                //fail
+                check=false;
+                break;//stop to check
+            }
+        }
+        if(check){
+            count++;
+        }
+    }
+    return count; 
+}
