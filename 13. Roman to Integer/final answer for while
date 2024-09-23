@@ -1,0 +1,26 @@
+int romanToInt(char * s){
+    int R['X'+1]={
+        //def the value of roman numberals
+        //R['I']=1; 不是用;是用,
+        R['I']=1,
+        R['V']=5,
+        R['X']=10,
+        R['L']=50,
+        R['C']=100,
+        R['D']=500,
+        R['M']=1000,
+    };
+    int result=0;}
+    int len= strlen(s);
+    int i=0;
+    while(i<len){
+        if(R[s[i]]<R[s[i+1]]){//IV=4，用減的
+            result=result-R[s[i]];
+        }
+        else{//II=2，用加的
+            result=result+R[s[i]];
+        } 
+        i++;
+    }
+    return result;
+}
