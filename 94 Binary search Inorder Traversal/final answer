@@ -1,19 +1,30 @@
-int i=0;
-int arr[101]={0};
-void inorder(struct TreeNode* s)
-{
-    if(s!=NULL)
-    {
+//inorder:left->mid->right
+
+//find how many nodes are not NULL
+//global variable
+int count;
+//arr[] to store the answer
+int arr[101];
+
+void inorder(struct TreeNode* s){
+    //if s is NULL, do on-op
+    if(s!=NULL){
+        //left->mid->right
         inorder(s->left);
-        arr[i++]=s->val;
+        //arr[count++]=s;//store s into arr[] first and i increment by 1,有錯應該記錄s的值s->val
+        arr[count++]=s->val;
         inorder(s->right);
     }
 }
 int* inorderTraversal(struct TreeNode* root, int* returnSize){
     inorder(root);
-    int* ans=malloc(i*sizeof(int));
-    for(int j=0;j<i;j++) ans[j]=arr[j];
-    *(returnSize)=i;
-    i=0;
+    //malloc an array to return the answer
+    int* ans=(int*)malloc(count*sizeof(int));
+    //use for loop to store the answer into ans[]
+    for(int i=0;i<count;i++){
+        ans[i]=arr[i];
+    }
+    *returnSize=count;
+    count=0;
     return ans;
 }
