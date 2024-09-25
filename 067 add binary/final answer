@@ -1,0 +1,25 @@
+//This problem involves inputting strings and outputting a string, but it requires performing addition.
+//Therefore, it also requires converting characters to numbers and numbers back to characters.
+//這題是輸入給字串，輸出也要是字串，但是要做加法，因此也考字符轉數字，數字轉字符
+
+char* addBinary(char* a, char* b) {
+    //determine how many bit need for answer
+    int i=strlen(a);
+    int j=strlen(b);
+    //nasSize=fmax(a,b)+2,the reason for +2 is 1 for '\0' 
+    //and other for a + b may result in a carry.(進位) ex:1+1=10
+    int ansSize=fmax(i,j)+2;
+    char* ans=malloc(ansSize*sizeof(char));
+    ans[--ansSize]='\0';
+    int carry=0;
+    while(--ansSize>=0){
+        //carry+= (i>=0)? a[--i]-'0':0;不能這樣寫，不然原本i=0，結果再減變成-1,a[-1] 錯
+        //carry+=(j>=0)? b[--j]-'0':0;
+        carry+= (--i>=0)? a[i]-'0':0;
+        carry+=(--j>=0)? b[j]-'0':0;
+        ans[ansSize]=(carry%2+'0');
+        carry=carry/2;//carry in
+    }
+    if(ans[0]=='0') return (ans+1);//return ans[1]~ans[ansSize-1]
+    return ans;
+}
