@@ -1,0 +1,38 @@
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColSize array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+
+void backtrack(int* nums,int numsSize,int* returnSize,int** returnColSize,int** ans,int* temp, int k, int n){
+    //k: determine how many element store from temp to ans
+    //n: determine index for nums
+    for(int i=n;i<numsSize;i++){
+        temp[k]=nums[i];//choose element to temp[]
+        //malloc a spzce in ans[k+1]
+        ans[*returnSize]=(int *)malloc((k+1)*sizeof(int));
+        memcpy(ans[*returnSize],temp,(k+1)*sizeof(int));
+        returnColSize[0][*returnSize]=k+1;
+        *returnSize+=1;
+        backtrack(nums, numsSize, returnSize, returnColSize, ans, temp, k+1, i+1);
+    }
+}
+
+//use back tracking algorithm 
+int** subsets(int* nums, int numsSize, int* returnSize, int** returnColSize) {
+    //determine know many subset
+    int n=1;
+    for(int i=0; i<numsSize; i++){//n=2^numsSize
+        n=n*2;
+    }
+    int** ans= malloc(n*sizeof(int*));
+    ans[0]=NULL;
+    *returnSize=1;
+    returnColSize[0]=malloc(n*sizeof(int*));
+    returnColSize[0][0]=0;
+    int * temp=malloc(numsSize*sizeof(int));//store the element and copy to ans[][]
+    backtrack(nums, numsSize, returnSize, returnColSize, ans, temp, 0, 0);
+    return ans;
+}
+    
+
