@@ -1,0 +1,17 @@
+//k=k records the position retained so far
+//index
+//[0,    1,2,3,4,2,2,3,3,4]
+// k    idx
+
+int removeDuplicates(int* nums, int numsSize) {
+    int k=0;
+    for(int idx=1;idx<numsSize;idx++){
+        if(nums[idx]== nums[k]) {
+            //Still checking for duplicate values
+            continue;
+        } 
+        //Check for unique values
+        nums[++k]=nums[idx];
+    }
+    return ++k;
+}
