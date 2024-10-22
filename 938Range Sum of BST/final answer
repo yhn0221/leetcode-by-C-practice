@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     struct TreeNode *left;
+ *     struct TreeNode *right;
+ * };
+ */
+
+int rangeSumBST(struct TreeNode* root, int low, int high) {
+    // interative DFS
+    struct TreeNode* stack[500];
+    struct TreeNode* node;
+    int sp=0, ans=0;
+    if(root != NULL){
+        stack[sp++] = root;
+    }
+    while (sp>0){
+        //還有節點要訪問
+        node=stack[--sp];
+        if (node->val >= low && node->val <= high ) ans +=node->val;
+        //先找左邊，所以先把右邊儲存起來
+        if (node->val <= high && node-> right != NULL) stack[sp++]= node->right;
+        if (node->val >= low && node-> left != NULL) stack[sp++]= node-> left;
+
+    }
+    return ans;
+}
