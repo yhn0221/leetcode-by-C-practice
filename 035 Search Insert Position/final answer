@@ -1,5 +1,6 @@
 bool isPalindrome(int x) {
-    if(x<0) return false; //只要是負的，一定是錯的
+    //if(x<0) return false; //只要是負的，一定是錯的，也該考慮如果是10的倍數但不是0也是false
+    if(x<0|| (x != 0 && x % 10 == 0))return false;
     int temp=x;
     unsigned rev=0;//測資有超大數，所以宣告這個
     while(x){
