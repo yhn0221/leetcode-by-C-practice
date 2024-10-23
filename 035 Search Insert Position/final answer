@@ -1,0 +1,10 @@
+bool isPalindrome(int x) {
+    if(x<0) return false; //只要是負的，一定是錯的
+    int temp=x;
+    unsigned rev=0;//測資有超大數，所以宣告這個
+    while(x){
+        rev=(rev * 10+ x % 10);
+        x=x/10;
+    }
+    return rev==temp;//將會回傳true or false
+}
